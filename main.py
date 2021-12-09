@@ -4,12 +4,15 @@ from schemes import scheme1
 import argparse
 from parent_selections import parent_selection1, parent_selection2, tournament_selection
 from survivor_selections import elitist
+from operators import swap, pmx_pair, cim, rsm
 
 parser = argparse.ArgumentParser()
 
 parser.add_argument("--generations", type=int, default=100)
 parser.add_argument("--population_size", type=int, default=100)
 parser.add_argument("--parent_selection", type=int, default=1)
+parser.add_argument("--crossover_selection", type=str, default='pmx')
+parser.add_argument("--mutation_selection", type=str, default='swap')
 parser.add_argument("--k_tournament", type=int, default=2) # k hyperparameter tournament selection
 parser.add_argument("--p_tournament", type=float, default=0.5) # p hyperparameter tournament selection
 
@@ -21,6 +24,8 @@ con = parser.parse_args()
 
 PARENT_SELECTION = con.parent_selection
 SURVIVOR_SELECTION = con.survivor_selection
+CROSSOVER_SELECTION = con.crossover_selection
+MUTATION_SELECTION = con.mutation_selection
 
 config = {'parent_selection': None,
 		  'survivor_selection' : None, 
@@ -43,6 +48,17 @@ elif PARENT_SELECTION == 3:
 
 if SURVIVOR_SELECTION == 'elitist':
 	config['survivor_selection'] = elitist
+
+if CROSSOVER_SELECTION == 'pmx':
+	config['crossover_selection'] = pmx_pair
+
+if MUTATION_SELECTION == 'swap':
+	config['mutation_selection'] = swap
+elif MUTATION_SELECTION == 'cim':
+	config['mutation_selection'] = cim
+elif MUTATION_SELECTION == 'rsm':
+	config['mutation_selection'] = rsm
+	
 
 def main():
 	

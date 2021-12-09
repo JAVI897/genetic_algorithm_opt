@@ -122,7 +122,7 @@ def update_history(metric_gen:tuple, config):
 def plot_results_distances(config):
 	plt.style.use('seaborn-whitegrid')
 	fig = plt.figure(figsize=(15,10))
-	n = config['generations']
+	n = len(config['metrics']['min_distance'])
 	n = range(n)
 	plt.plot(n, config['metrics']['min_distance'], '-.', linewidth = 0.8, label = 'Min distance')
 	plt.plot(n, config['metrics']['max_distance'], '--', linewidth = 0.8, label = 'Max distance')
@@ -137,7 +137,7 @@ def plot_results_distances(config):
 def plot_results_fitness(config):
 	plt.style.use('seaborn-whitegrid')
 	fig = plt.figure(figsize=(15,10))
-	n = config['generations']
+	n = len(config['metrics']['min_distance'])
 	n = range(n)
 	plt.plot(n, config['metrics']['min_fitness'], '-.', linewidth = 0.8, label = 'Min fitness')
 	plt.plot(n, config['metrics']['max_fitness'], '--', linewidth = 0.8, label = 'Max fitness')
@@ -155,7 +155,7 @@ def save_config(config):
 	config_save = {}
 	name_file = ''
 	for key, item in config.items():
-		if key in ['parent_selection', 'survivor_selection']:
+		if key in ['parent_selection', 'survivor_selection', 'crossover_selection', 'mutation_selection']:
 			config_save[key] = item.__name__
 			name_file += '{}-{}_'.format(key, item.__name__)
 		else:

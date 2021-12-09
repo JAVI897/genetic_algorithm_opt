@@ -1,7 +1,6 @@
 from utils import create_population
 from utils import total_distance, total_fitness
 import random
-from operators import swap_mutate, pmx_pair
 import numpy as np
 from utils import retrieve_info, plot_results_distances, plot_results_fitness, update_history
 
@@ -25,11 +24,11 @@ def next_generation1(population, distances, config):
 		p2 = config['parent_selection'](population, config)
 		
 		#Do crossovers
-		c1, c2 = pmx_pair(p1, p2, distances)
+		c1, c2 = config['crossover_selection'](p1, p2, distances)
 
 		#Do mutating 
-		c1 = swap_mutate(c1, distances)
-		c2 = swap_mutate (c2, distances)
+		c1 = config['mutation_selection'](c1, distances)
+		c2 = config['mutation_selection'](c2, distances)
 
 		offspring.append(c1)
 		offspring.append(c2)
@@ -55,7 +54,11 @@ def generation_generator1(population, distances, config):
 		
 		if(population[0][1] < current_best[1]):
 			current_best = population[0]
-	
+
+		if metric[0] == metric[1]: # max_distance == min_distance
+			print('Training stopped because max distance == min distance')
+			break
+
 	if config['verbose']:
 		plot_results_distances(config)
 		plot_results_fitness(config)
