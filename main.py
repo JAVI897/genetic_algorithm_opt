@@ -4,7 +4,7 @@ from schemes import scheme1
 import argparse
 from parent_selections import parent_selection1, parent_selection2, tournament_selection
 from survivor_selections import elitist
-from operators import swap, pmx_pair, cim, rsm
+from operators import COWGC, pmx_pair, cim, rsm, swap
 
 parser = argparse.ArgumentParser()
 
@@ -51,6 +51,8 @@ if SURVIVOR_SELECTION == 'elitist':
 
 if CROSSOVER_SELECTION == 'pmx':
 	config['crossover_selection'] = pmx_pair
+elif CROSSOVER_SELECTION == 'COWGC':
+	config['crossover_selection'] = COWGC
 
 if MUTATION_SELECTION == 'swap':
 	config['mutation_selection'] = swap

@@ -3,8 +3,43 @@ import numpy as np
 # Crossover 
 # --------------------------------------------------------------------------------------
 
+def COWGC(parent1, parent2, distances):
+	'''
+	Cut on worst gene crossover
+
+	'''
+	parent1 = parent1[0]
+	parent2 = parent2[0]
+
+	distance1, cut_point1 = max([( distances.get_distance(parent1[i], parent1[i+1]), i) for i in range(len(parent1) - 1)] + [( distances.get_distance(parent1[0], parent1[-1]), len(parent1) - 1)])
+	distance2, cut_point2 = max([( distances.get_distance(parent2[i], parent2[i+1]), i) for i in range(len(parent2) - 1)] + [( distances.get_distance(parent2[0], parent2[-1]), len(parent2) - 1)])
+
+	if distance1 > distance2:
+		child1, child2 = modified_crossover_COWGC(parent1, parent2,cut_point1)
+	else:
+		child1, child2 = modified_crossover_COWGC(parent1, parent2, cut_point2)
+
+	return [child1, distances.get_distance_of_individual(child1), 0], [child2, distances.get_distance_of_individual(child2), 0]
+
+def modified_crossover_COWGC(parent1, parent2, cut_point):
+	'''
+
+	'''
+	before_cutoff_p1 = parent1[:cut_point]
+	before_cutoff_p2 = parent2[:cut_point]
+
+	for i in parent2:
+		if i not in before_cutoff_p1:
+			before_cutoff_p1.append(i)
+
+	for i in parent1:
+		if i not in before_cutoff_p2:
+			before_cutoff_p2.append(i)
+
+	return before_cutoff_p1, before_cutoff_p2
+
 def pmx(parent1, parent2, start, stop, distances):
-	child = [None] * len(parent1)
+	child = [None for i in range( len(parent1))]
 	child[start:stop] = parent1[start:stop]
 	
 	for ind, x in enumerate(parent2[start:stop]):
