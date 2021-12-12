@@ -57,6 +57,7 @@ def generation_generator1(population, distances, config):
 
 		if metric[0] == metric[1]: # max_distance == min_distance
 			print('Training stopped because max distance == min distance')
+			config['generations'] = number_of_generations
 			break
 
 	if config['verbose']:
