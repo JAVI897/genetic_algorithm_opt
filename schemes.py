@@ -68,7 +68,7 @@ def generation_generator1(population, distances, config):
 
 #Schemes
 
-def scheme1(distances, cities, config):
-	population = create_population( config['population_size'], cities, distances)
+def scheme1(distances, cities, config, seeds):
+	population = create_population( config['population_size'], cities, distances, seeds)
 	best_candidate = generation_generator1(population, distances, config)
 	return best_candidate

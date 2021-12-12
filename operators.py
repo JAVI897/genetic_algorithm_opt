@@ -5,8 +5,10 @@ import numpy as np
 
 def COWGC(parent1, parent2, distances):
 	'''
-	Cut on worst gene crossover
-
+		Cut on worst gene crossover (COWGC)
+		Alkafaween, E. A. O. (2018). Novel methods for 
+		enhancing the performance of genetic algorithms. 
+		arXiv preprint arXiv:1801.02827.
 	'''
 	parent1 = parent1[0]
 	parent2 = parent2[0]

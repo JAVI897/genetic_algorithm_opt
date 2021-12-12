@@ -66,14 +66,31 @@ def main():
 	
 	distances = Distance(config['url_locations'])
 	cities = list(distances.node_locations.keys()) # list of cities
-	best_candidate = scheme1(distances, cities, config)
+
+	# to do: repeat N times and save in solution the mean average
+	# seeds must be different and configuration must be saved for each repetition
+	# put configuration in a function
+	# total arrays of seeds = N
+	# save metrics of best run
+	#
+	# confs = []
+	# for repetition in range(N):
+	#     seed = seeds[repetition]
+	#     config = configuration()
+	#     
+	#     confs.append(config)
+	# do statistics of confs
+
+	seeds = list(range( config['population_size'] ))
+
+	start = time.time()
+	best_candidate = scheme1(distances, cities, config, seeds)
+	result_time = time.time() - start
 	config['solution'] = best_candidate
+	config['run-time'] = result_time
+	print("Time result:   {0:.6f}s".format(result_time))
 	print(best_candidate)
 
 if __name__ == '__main__':
-	start = time.time()
 	main()
-	result_time = time.time() - start
-	print("Time result:   {0:.6f}s".format(result_time))
-	config['run-time'] = result_time
 	save_config(config)

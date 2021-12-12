@@ -77,16 +77,17 @@ def total_fitness(population):
 
 #Population
 
-def create_population(size, cities, distances):
+def create_population(size, cities, distances, seeds):
 	population = []
 	for i in range(size):
 		copy = cities.copy()
+		random.seed(seeds[i])
 		random.shuffle(copy)
 		population.append([copy, distances.get_distance_of_individual(copy), 0]) # ind: ([x], distance, fitness)
 
 	for i in range(len(population)):
 		population[i][2] = 1 / population[i][1]
-
+	print(population)
 	return population
 
 # calculate metrics during training
