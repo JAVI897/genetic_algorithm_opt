@@ -87,7 +87,6 @@ def create_population(size, cities, distances, seeds):
 
 	for i in range(len(population)):
 		population[i][2] = 1 / population[i][1]
-	print(population)
 	return population
 
 # calculate metrics during training

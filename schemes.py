@@ -59,6 +59,11 @@ def generation_generator1(population, distances, config):
 			print('Training stopped because max distance == min distance')
 			config['generations'] = number_of_generations
 			break
+		# early stopping after 30 generations. Starts working when generations > 50
+		if number_of_generations > 50 and metric[1] == config['metrics']['min_distance'][-30]:
+			print('min_distance did not improve after 30 generations. Stopping...')
+			config['generations'] = number_of_generations
+			break
 
 	if config['verbose']:
 		plot_results_distances(config)

@@ -25,7 +25,10 @@ def COWGC(parent1, parent2, distances):
 
 def modified_crossover_COWGC(parent1, parent2, cut_point):
 	'''
-
+		Modified crossover
+		Davis, L. (1985, August). Applying adaptive 
+		algorithms to epistatic domains. 
+		In IJCAI (Vol. 85, pp. 162-164).
 	'''
 	before_cutoff_p1 = parent1[:cut_point]
 	before_cutoff_p2 = parent2[:cut_point]
