@@ -3,8 +3,8 @@ from utils import Distance, save_config
 from schemes import scheme1
 import argparse
 from parent_selections import parent_selection1, parent_selection2, tournament_selection
-from survivor_selections import elitist
-from operators import COWGC, pmx_pair, cim, rsm, swap
+from survivor_selections import elitist, elitist_with_explicit_fitness_sharing
+from operators import COWLRGC, COWGC, pmx_pair, cim, rsm, swap
 
 parser = argparse.ArgumentParser()
 
@@ -17,6 +17,11 @@ parser.add_argument("--k_tournament", type=int, default=2) # k hyperparameter to
 parser.add_argument("--p_tournament", type=float, default=0.5) # p hyperparameter tournament selection
 
 parser.add_argument("--survivor_selection", type=str, default='elitist') #todo: use names instead of numbers
+# Hyperparameters for explicit fitness sharing
+parser.add_argument("--beta", type=float, default = 1)
+parser.add_argument("--alpha", type=float, default = 0)
+parser.add_argument("--sigma", type=float, default = 5)
+
 parser.add_argument("--verbose", type=bool, default=False)
 parser.add_argument("--url_locations", type=str, default="https://gitlab.com/drvicsana/opt-proyecto-genetico-2021/-/raw/main/berlin52.tsp")
 con = parser.parse_args()
@@ -32,6 +37,9 @@ def configuration():
 			  'survivor_selection' : None, 
 			  'k_tournament': con.k_tournament,
 			  'p_tournament': con.p_tournament,
+			  'beta': con.beta,
+			  'alpha': con.alpha,
+			  'sigma': con.sigma,
 			  'generations': con.generations,
 			  'population_size': con.population_size,
 			  'verbose': con.verbose,
@@ -49,11 +57,15 @@ def configuration():
 
 	if SURVIVOR_SELECTION == 'elitist':
 		config['survivor_selection'] = elitist
+	elif SURVIVOR_SELECTION == 'elitist_fitness_sharing':
+		config['survivor_selection'] = elitist_with_explicit_fitness_sharing
 
 	if CROSSOVER_SELECTION == 'pmx':
 		config['crossover_selection'] = pmx_pair
 	elif CROSSOVER_SELECTION == 'COWGC':
 		config['crossover_selection'] = COWGC
+	elif CROSSOVER_SELECTION == 'COWLRGC':
+		config['crossover_selection'] = COWLRGC
 
 	if MUTATION_SELECTION == 'swap':
 		config['mutation_selection'] = swap

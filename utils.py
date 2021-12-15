@@ -152,17 +152,23 @@ def plot_results_fitness(config):
 # save experiments
 
 def save_config(config):
+	abrev = {'parent_selection':'par', 'survivor_selection':'sur', 'crossover_selection':'cros', 
+	         'mutation_selection':'mut', 'population_size':'pop', 'generations': 'gen', 'k_tournament': 'k', 
+			 'p_tournament': 'p_t', 'beta': 'b', 'alpha': 'a', 'sigma':'s'}
 	config_save = {}
 	name_file = ''
 	for key, item in config.items():
 		if key in ['parent_selection', 'survivor_selection', 'crossover_selection', 'mutation_selection']:
 			config_save[key] = item.__name__
-			name_file += '{}-{}_'.format(key, item.__name__)
+			name_file += '{}-{}_'.format(abrev[key], item.__name__)
 		else:
 			config_save[key] = item
-			if key in ['population_size', 'generations', 'k_tournament', 'p_tournament']:
-				name_file += '{}-{}_'.format(key, item)
+			if key in ['population_size', 'generations', 'k_tournament', 
+					   'p_tournament', 'beta', 'alpha', 'sigma']:
+				name_file += '{}-{}_'.format(abrev[key], item)
 
 	out_path = os.path.join('./save_train_dir/', f'{name_file}.json')
+	print(len(out_path))
+	print(out_path)
 	with open(out_path, 'w') as outfile:
 	    json.dump(config_save, outfile)

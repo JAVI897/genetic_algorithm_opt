@@ -3,6 +3,26 @@ import numpy as np
 # Crossover 
 # --------------------------------------------------------------------------------------
 
+def COWLRGC(parent1, parent2, distances):
+	'''
+		Cut On Worst L+R Crossover (COWLRGC)
+		Alkafaween, E. A. O. (2018). Novel methods for 
+		enhancing the performance of genetic algorithms. 
+		arXiv preprint arXiv:1801.02827.
+	'''
+	parent1 = parent1[0]
+	parent2 = parent2[0]
+
+	distance1, cut_point1 = max([( distances.get_distance(parent1[i], parent1[i+1]) + distances.get_distance(parent1[i-1], parent1[i]), i) for i in range(1, len(parent1) - 1)] + [( distances.get_distance(parent1[0], parent1[-1]) + distances.get_distance(parent1[-2], parent1[-1]), len(parent1) - 1)])
+	distance2, cut_point2 = max([( distances.get_distance(parent2[i], parent2[i+1]) + distances.get_distance(parent2[i-1], parent2[i]), i) for i in range(1, len(parent2) - 1)] + [( distances.get_distance(parent2[0], parent2[-1]) + distances.get_distance(parent1[-2], parent1[-1]), len(parent2) - 1)])
+
+	if distance1 > distance2:
+		child1, child2 = modified_crossover_COWGC(parent1, parent2,cut_point1)
+	else:
+		child1, child2 = modified_crossover_COWGC(parent1, parent2, cut_point2)
+
+	return [child1, distances.get_distance_of_individual(child1), 0], [child2, distances.get_distance_of_individual(child2), 0]
+
 def COWGC(parent1, parent2, distances):
 	'''
 		Cut on worst gene crossover (COWGC)

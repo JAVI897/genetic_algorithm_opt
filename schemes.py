@@ -38,7 +38,7 @@ def next_generation1(population, distances, config):
 	
 	population += offspring
 	
-	config['survivor_selection'](population, population_size)
+	config['survivor_selection'](population, population_size, config)
 
 
 #Generation Functions
