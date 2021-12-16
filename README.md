@@ -14,13 +14,13 @@
 
 You can run the GA with:
 
-```
+```python
 python main.py --generations <generations> 
-			   --population_size <population_size>
-			   --parent_selection <parent_selection> 
-			   --crossover_selection <crossover_selection>
-    		   --mutation_selection <mutation_selection>
-        	   --k_tournament <k_tournament> --p_tournament <p_tournament>
+               --population_size <population_size>
+               --parent_selection <parent_selection> 
+               --crossover_selection <crossover_selection>
+               --mutation_selection <mutation_selection>
+               --k_tournament <k_tournament> --p_tournament <p_tournament>
                --survivor_selection <survivor_selection>
                --beta <beta> --alpha <alpha> --sigma <sigma>
                --verbose <verbose> --url_locations <url_locations>
