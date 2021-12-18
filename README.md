@@ -1,14 +1,12 @@
 # Solving TSP with Genetic Algorithms
- Implementation of Genetic Algorithm for solving TSP problem
+### About
 
-
+Implementation of Genetic Algorithm for solving TSP problem
 
 ### Dependencies
 
 - numpy
 - matplotlib
-
-
 
 ### Usage
 
