@@ -18,6 +18,9 @@ def parent_selection1(population, config):
 	return selected
 
 def parent_selection2(population, config):
+	"""
+	Roulette selection
+	"""
 	selected = None
 	tot_fit = total_fitness(population)
 	probabilities = [i[2]/tot_fit for i in population]
