@@ -1,7 +1,7 @@
 # Solving TSP with Genetic Algorithms
 ### About
 
-Implementation of Genetic Algorithm for solving TSP problem
+The traveling salesman problem (TSP) is a well known NP-hard problem in computer science. Many studies have tried to improve the genetic algorithm used to solve TSP. In this project, several mutation and crossover operators were used for the *berlin52* TSP instance with different selection methods. Some parameters in the genetic algorithm should be adjusted for the algorithm to produce consistent results. In this work, different experiments were performed on the different methods of selection, crossover operators and mutation operators.
 
 ### Dependencies
 
